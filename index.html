@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Juno's World 🐾🎀🕹️</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app-container">
+        <header id="main-header">
+            <h1>Juno's World</h1>
+            <div id="paw-coin-display">PawCoins: <span id="paw-coins" data-animation="pop">0</span> 🪙</div>
+        </header>
+
+        <main id="content-area">
+            <div id="juno-care-module" class="window">
+                <div class="title-bar">Juno <span id="juno-mood-emoji">😊</span></div>
+                <div id="juno-display-area">
+                    <div id="juno-thought-bubble" class="hidden"></div>
+                    <div id="juno-sprite" class="juno-idle">
+                        <div id="juno-hat-slot" class="outfit-slot"></div> <div class="pixel-cat-face">
+                            <div class="chest-spot"></div>
+                            <div class="ear left"></div><div class="ear right"></div>
+                            <div class="eye left"></div><div class="eye right"></div>
+                            <div class="nose"></div><div class="mouth"></div>
+                            <div class="whisker-group-left">
+                                <div class="whisker"></div><div class="whisker"></div><div class="whisker"></div>
+                            </div>
+                            <div class="whisker-group-right">
+                                <div class="whisker"></div><div class="whisker"></div><div class="whisker"></div>
+                            </div>
+                        </div>
+                        <div class="tail"></div>
+                    </div>
+                </div>
+                <div id="juno-stats">
+                    <div class="stat">💖 Mood: <span id="juno-mood" data-animation="pop">100</span>%</div>
+                    <div class="stat">🍲 Hunger: <span id="juno-hunger" data-animation="pop">80</span>%</div>
+                    <div class="stat">⚡ Energy: <span id="juno-energy" data-animation="pop">90</span>%</div>
+                    <div class="stat">🧸 Play: <span id="juno-playfulness" data-animation="pop">70</span>%</div>
+                </div>
+                <div id="juno-actions">
+                    <button class="action-button" id="feed-button" data-tooltip="Go to Shop to Buy Food">Feed Juno</button>
+                    <button class="action-button" id="play-treat-catch-button">Play Catch!</button>
+                    <button class="action-button" id="play-sky-hop-button">Play Sky Hop!</button>
+                    <button class="action-button" id="sleep-button">Rest</button>
+                </div>
+            </div>
+
+            <div id="side-quests-module" class="window">
+                <div class="title-bar">Daily Quests 🎯</div>
+                <ul id="quest-list">
+                    </ul>
+            </div>
+
+            <div id="self-care-module" class="window">
+                <div class="title-bar">Maya's Wellspring</div>
+                <div id="quote-of-the-day">
+                    <p id="quote-text">"Loading inspirational quote..."</p>
+                    <p id="quote-author"></p>
+                </div>
+                <ul id="task-list"></ul>
+            </div>
+        </main>
+
+        <nav id="bottom-menu">
+            <button class="menu-button" id="shop-button">🛒 Shop</button>
+            <button class="menu-button" id="outfits-button">🎀 Outfits</button> <button class="menu-button" id="settings-button" disabled>⚙️ Settings</button>
+        </nav>
+    </div>
+
+    <div id="shop-modal" class="modal hidden">
+        <div class="modal-content window">
+            <div class="title-bar">Juno's Goodies 🛍️<button id="close-shop-button" class="close-button">X</button></div>
+            <div id="shop-items-container"></div>
+            <p class="shop-balance">Your PawCoins: <span id="shop-paw-coins">0</span> 🪙</p>
+        </div>
+    </div>
+
+    <div id="outfit-inventory-modal" class="modal hidden">
+        <div class="modal-content window">
+            <div class="title-bar">Juno's Closet 🎀<button id="close-outfits-button" class="close-button">X</button></div>
+            <div id="outfit-items-container">
+                </div>
+            <button id="unequip-all-button" class="action-button">Unequip All</button>
+        </div>
+    </div>
+
+    <div id="treat-catch-modal" class="modal hidden">
+        <div class="modal-content window game-window">
+            <div class="title-bar">Juno's Treat Catch! 🐟<button id="close-treat-catch-button" class="close-button">X</button></div>
+            <div id="game-instructions-treat-catch">
+                <p>Use ⬅️ and ➡️ arrow keys (or tap sides) to move Juno. Catch the falling treats!</p>
+                <button id="start-treat-catch-button" class="action-button">Start Game</button>
+            </div>
+            <div id="game-area-treat-catch" class="hidden">
+                <div id="game-catcher-treat-catch"></div>
+                <div id="game-score-display-treat-catch">Score: <span id="game-score-treat-catch">0</span></div>
+                <div id="game-timer-display-treat-catch">Time: <span id="game-timer-treat-catch">30</span>s</div>
+            </div>
+            <div id="game-over-screen-treat-catch" class="hidden">
+                <h2>Game Over!</h2>
+                <p>Your Score: <span id="final-score-treat-catch">0</span></p>
+                <p>PawCoins Earned: <span id="game-reward-treat-catch">0</span> 🪙</p>
+                <button id="play-again-treat-catch-button" class="action-button">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="sky-hop-modal" class="modal hidden">
+        <div class="modal-content window game-window">
+            <div class="title-bar">Juno's Sky Hop! ☁️<button id="close-sky-hop-button" class="close-button">X</button></div>
+            <div id="game-instructions-sky-hop">
+                <p>Press [Space] or Tap to make Juno Hop! Land on clouds. Avoid falling!</p>
+                <button id="start-sky-hop-button" class="action-button">Start Game</button>
+            </div>
+            <div id="game-area-sky-hop" class="hidden">
+                <canvas id="sky-hop-canvas"></canvas>
+                <div id="game-score-display-sky-hop">Score: <span id="game-score-sky-hop">0</span></div>
+            </div>
+            <div id="game-over-screen-sky-hop" class="hidden">
+                <h2>Game Over!</h2>
+                <p>Your Score: <span id="final-score-sky-hop">0</span></p>
+                <p>PawCoins Earned: <span id="game-reward-sky-hop">0</span> 🪙</p>
+                <button id="play-again-sky-hop-button" class="action-button">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
